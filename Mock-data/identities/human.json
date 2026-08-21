@@ -1,7 +1,8 @@
 {
-  "employees": [
+  "human_employees": [
     {
       "employee_id": "EMP-1042",
+      "identity_type": "human",
       "name": "James Miller",
       "email": "james.miller@mockbank.com",
       "department": "Investment Banking",
@@ -11,11 +12,22 @@
     },
     {
       "employee_id": "EMP-1087",
+      "identity_type": "human",
       "name": "Sarah Thompson",
       "email": "sarah.thompson@mockbank.com",
       "department": "Asset Management",
       "team": "Public Equities",
       "role": "Analyst",
+      "status": "ACTIVE"
+    },
+    {
+      "employee_id": "EMP-101",
+      "identity_type": "human",
+      "name": "Sarah Smith",
+      "email": "sarah.smith@mockbank.com",
+      "department": "Private Capital Markets",
+      "team": "Private Capital Markets",
+      "role": "Associate",
       "status": "ACTIVE"
     }
   ]

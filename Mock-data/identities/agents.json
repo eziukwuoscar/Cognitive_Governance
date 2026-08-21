@@ -1,0 +1,54 @@
+{
+  "agent_employees": [
+    {
+      "agent_id": "AGENT-042",
+      "identity_type": "agent",
+      "name": "Sarah Deal Agent",
+
+      "ownership": {
+        "type": "human",
+        "owner_id": "EMP-101"
+      },
+
+      "deployment_type": "personal",
+
+      "scope": {
+        "department": "Private Capital Markets",
+        "owner_only": true
+      },
+
+      "permissions": [
+        "deal.read",
+        "deal.update",
+        "communication.read"
+      ],
+
+      "status": "ACTIVE"
+    },
+
+    {
+      "agent_id": "AGENT-001",
+      "identity_type": "agent",
+      "name": "Firm Compliance Agent",
+
+      "ownership": {
+        "type": "organization",
+        "owner_id": "MOCKBANK"
+      },
+
+      "deployment_type": "firm",
+
+      "scope": {
+        "organization": "firm-wide"
+      },
+
+      "permissions": [
+        "deal.read",
+        "communication.read",
+        "policy.read"
+      ],
+
+      "status": "ACTIVE"
+    }
+  ]
+}

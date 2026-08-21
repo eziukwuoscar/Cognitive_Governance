@@ -1,0 +1,38 @@
+{
+  "application_id": "APP-001",
+  "name": "DealFlow",
+  "description": "Internal application used to manage private capital market deals.",
+
+  "actions": [
+    {
+      "action": "deal.get",
+      "tool": "get_deal",
+      "description": "Retrieve information about a specific deal."
+    },
+    {
+      "action": "deal.create",
+      "tool": "create_deal",
+      "description": "Create a new deal."
+    },
+    {
+      "action": "deal.update",
+      "tool": "update_deal",
+      "description": "Update information on an existing deal."
+    },
+    {
+      "action": "deal.delete",
+      "tool": "delete_deal",
+      "description": "Delete an existing deal."
+    },
+    {
+      "action": "deal.approve",
+      "tool": "approve_deal",
+      "description": "Approve a deal to move to the next stage."
+    },
+    {
+      "action": "deal.send_to_client",
+      "tool": "send_deal_to_client",
+      "description": "Send deal information to an external client."
+    }
+  ]
+}
