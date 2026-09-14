@@ -17,7 +17,8 @@ class PolicyDecision:
     reason: str
 
 
-def evaluate_policy(
+def evaluate(
+    server: str,
     tool_name: str,
     arguments: dict
 ) -> PolicyDecision:

@@ -1,37 +1,27 @@
 {
   "policies": [
     {
-      "policy_id": "POL-001",
-      "name": "Agent Deal Access",
-      "rule": "Agents may only access deals within their assigned scope."
+      "policy_id": "POL-007",
+      "name": "Deal Valuation Change Policy",
+      "description": "Material changes to deal valuations require senior approval.",
+
+      "applies_to": {
+        "identity_types": ["human", "agent"],
+        "actions": ["deal.update"]
+      },
+
+      "conditions": {
+        "valuation_change_percent_gt": 20
+      },
+
+      "effect": "require_approval",
+
+      "approval": {
+        "required_role": "Managing Director"
+      }
     },
     {
       "policy_id": "POL-002",
-      "name": "Restricted Securities",
-      "rule": "Trading restricted securities requires compliance review."
-    },
-    {
-      "policy_id": "POL-003",
-      "name": "Agent Communication Access",
-      "rule": "Personal agents may only search communications belonging to their owner unless explicitly authorized."
-    },
-    {
-      "policy_id": "POL-004",
-      "name": "Deal Valuation Change Policy",
-      "rule": "Changes greater than 20% require Managing Director approval."
-    },
-    {
-      "policy_id": "POL-005",
-      "name": "Firm Compliance Agent",
-      "rule": "The Firm Compliance Agent has firm-wide read access but cannot modify deal or trading records."
-    },
-    {
-      "policy_id": "POL-006",
-      "name": "High-Risk Agent Action",
-      "rule": "AI-initiated financial changes above $10M require human approval."
-    },
-    {
-      "policy_id": "POL-007",
       "name": "Deal Valuation Change Policy",
       "description": "Material changes to deal valuations require senior approval.",
 
