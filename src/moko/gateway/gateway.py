@@ -1,45 +1,51 @@
-from moko.policy.policy import PolicyDecision as policy
+from moko.policy import policy
+from moko.tools import tool
+from moko.tools.tool_call import ToolCall
+
 
 class MokoGateway:
 
     async def execute(
         self,
-        server: str,
-        tool: str,
-        arguments: dict
+        call: ToolCall
     ):
 
-        # 1. Check policy
-        decision = await policy.evaluate(
-            server=server,
-            tool_name=tool,
-            arguments=arguments
-        )
+        # 1. Find the tool
+        selected_tool = tool.get_tool(call.tool)
 
-        # 2. Stop blocked actions
-        if decision.action == "BLOCK":
+        print("Selected tool:", selected_tool)
+
+        # 2. Stop unknown tools
+        if selected_tool is None:
             return {
                 "decision": "BLOCK",
-                "reason": decision.reason
+                "reason": "This tool does not exist. Contact your administrator."
             }
 
-        # 3. Forward allowed actions
-        result = await connector.call_tool(
-            server=server,
-            tool=tool,
-            arguments=arguments
+        # 3. Check policy
+        decision = policy.evaluate(
+            tool_name=selected_tool.name,
+            arguments=call.arguments
         )
 
-        # 4. Record what happened
-        await audit.record(
-            server=server,
-            tool=tool,
-            arguments=arguments,
-            result=result
-        )
+        print("Policy decision:", decision)
 
-        # 5. Return result
-        return {
-            "decision": "ALLOW",
-            "result": result
-        }
+        # 4. Stop blocked actions
+        # if decision.decision == "BLOCK":
+        #     return {
+        #         "decision": "BLOCK",
+        #         "reason": decision.reason
+        #     }
+
+        # # 5. Pause actions requiring approval
+        # if decision.decision == "REQUIRE_APPROVAL":
+        #     return {
+        #         "decision": "REQUIRE_APPROVAL",
+        #         "reason": decision.reason
+        #     }
+
+        # # 6. Allowed
+        # return {
+        #     "decision": "ALLOW",
+        #     "reason": decision.reason
+        # }

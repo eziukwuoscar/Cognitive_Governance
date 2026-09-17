@@ -18,7 +18,6 @@ class PolicyDecision:
 
 
 def evaluate(
-    server: str,
     tool_name: str,
     arguments: dict
 ) -> PolicyDecision:
