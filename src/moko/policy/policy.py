@@ -1,56 +1,7 @@
 # src/moko/policy.py
-
-from policy.policyDecision import PolicyDecision
-from policy.conditions import PolicyConditions
-
-COMPANY_POLICIES = [
-    {
-        "policy_id": "POL-007",
-        "name": "Jira Ticket Delete Policy",
-        "reason": "Deleting tickets isn't permited by Pjt partners",
-
-        "applies_to": {
-            "identity_types": ["human", "agent"],
-            "actions": ["ticket.delete"]
-        },
-
-        "effect": "BLOCK"
-    },
-
-    {
-        "policy_id": "POL-002",
-        "name": "Jira Ticket Close Policy",
-        "reason": "Closing tickets requires senior approval",
-
-        "applies_to": {
-            "identity_types": ["human", "agent"],
-            "actions": ["ticket.update"]
-        },
-
-        "conditions": {
-            "status_equals": "closed"
-        },
-
-        "effect": "REQUIRE_APPROVAL",
-
-        "approval": {
-            "required_role": "Managing Director"
-        }
-    },
-
-    {
-        "policy_id": "POL-003",
-        "name": "Jira Ticket Read Policy",
-        "reason": "Closing tickets requires senior approval",
-
-        "applies_to": {
-            "identity_types": ["human", "agent"],
-            "actions": ["ticket.read"]
-        },
-
-        "effect": "ALLOW"
-    }
-]
+import sys
+from moko.policy.policyDecision import PolicyDecision
+from moko.policy.conditions import PolicyConditions
 
 
 class PolicyEngine:
@@ -97,6 +48,8 @@ class PolicyEngine:
       action=action,
       identity_type=identity_type
     )
+    
+    print(f"matching policies: {matching_policies}", file=sys.stderr, flush=True)
     
     if not matching_policies:
             return PolicyDecision(

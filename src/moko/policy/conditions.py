@@ -3,10 +3,14 @@ from dataclasses import dataclass
 
 @dataclass
 class PolicyConditions:
+    
+    def __init__(self, policies, arguments):
+        self.policies = policies
+        self.arguments = arguments
 
-    def _conditions_match(self, policy: dict, arguments: dict) -> bool:
+    def _conditions_match(self, policies: dict, arguments: dict) -> bool:
 
-        conditions = policy.get("conditions")
+        conditions = policies.get("conditions")
 
         # No conditions means policy always applies
         if not conditions:
