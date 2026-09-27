@@ -2,6 +2,7 @@ import sys
 from moko.policy.policy import PolicyEngine
 from moko.tools import tool
 from moko.tools.tool_call import ToolCall
+from moko.auth_server.caller_identity import get_caller_identity, Identity
 
 
 COMPANY_POLICIES = [
@@ -62,6 +63,14 @@ class MokoGateway:
         self,
         call: ToolCall
     ):
+        
+        try:
+            caller: Identity = get_caller_identity()
+        except PermissionError:
+            return {
+                "status": "unauthenticated",
+                "reason": "Missing or invalid test credential",
+            }
 
         # 1. Find the tool
         selected_tool = tool.get_tool(call.tool)
@@ -80,7 +89,7 @@ class MokoGateway:
         decision = self.policy_engine.evaluate(
             action="ticket.update",
             arguments=call.arguments,
-            identity_type="human",
+            identity_type= caller.token.identity_type,
         )
 
         print("Policy decision:", decision)
