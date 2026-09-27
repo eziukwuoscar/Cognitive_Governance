@@ -25,6 +25,12 @@ TOOLS = {
         name="send_email",
         server="outlook",
         description="Send an email"
+    ),
+    
+    "create_jira_issue": Tool(
+        name= "createJiraIssue",
+        server="jira",
+        description= "Create a new Jira issue"
     )
 }
 
